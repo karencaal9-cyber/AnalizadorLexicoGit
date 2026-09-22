@@ -1,0 +1,3 @@
+int 123nombre = 10;
+string mensaje = "Hola mundo;
+@variable = 5;
