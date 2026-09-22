@@ -1,4 +1,0 @@
-int edad = 20;
-string nombre = "Carlos";
-double altura = 1.65;
-bool estudiante = true;

@@ -1,9 +1,0 @@
-int 2edad = 20;
-
-string nombre = "Carlos;
-
-char letra = 'a;
-
-int edad = 20 @ 5;
-
-/* Este comentario no se cierra

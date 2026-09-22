@@ -1,3 +1,0 @@
-float numero = 12.5.8;
-/* Este comentario no se cierra
-int edad = 20;
