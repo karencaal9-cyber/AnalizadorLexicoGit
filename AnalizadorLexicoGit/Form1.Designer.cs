@@ -186,10 +186,10 @@
             // 
             this.txtConsola.BackColor = System.Drawing.Color.Black;
             this.txtConsola.ForeColor = System.Drawing.Color.LimeGreen;
-            this.txtConsola.Location = new System.Drawing.Point(180, 459);
+            this.txtConsola.Location = new System.Drawing.Point(180, 436);
             this.txtConsola.Multiline = true;
             this.txtConsola.Name = "txtConsola";
-            this.txtConsola.Size = new System.Drawing.Size(137, 28);
+            this.txtConsola.Size = new System.Drawing.Size(678, 84);
             this.txtConsola.TabIndex = 10;
             // 
             // Form1

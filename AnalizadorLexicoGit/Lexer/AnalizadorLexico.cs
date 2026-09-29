@@ -94,6 +94,16 @@ namespace AnalizadorLexicoGit.Lexer
                     continue;
                 }
 
+                if (actual == '+' ||
+                    actual == '-' ||
+                    actual == '*' ||
+                    actual == '/' ||
+                    actual == '%')
+                {
+                    ReconocerOperadorAritmetico();
+                    continue;
+                }
+
                 if (actual == '=' ||
                     actual == '!' ||
                     actual == '<' ||
@@ -125,6 +135,8 @@ namespace AnalizadorLexicoGit.Lexer
                     _fila,
                     _columna
                 ));
+
+
                 Avanzar();
             }
         }
@@ -280,18 +292,6 @@ namespace AnalizadorLexicoGit.Lexer
 
                     return;
                 }
-
-                if (actual == '+' ||
-                    actual == '-' ||
-                    actual == '*' ||
-                    actual == '/' ||
-                    actual == '%')
-                {
-                    ReconocerOperadorAritmetico();
-                    continue;
-                }
-
-
                 Avanzar();
             }
 

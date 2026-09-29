@@ -47,17 +47,57 @@ namespace AnalizadorLexicoGit
 
             if (string.IsNullOrWhiteSpace(codigo))
             {
-                MessageBox.Show("Por favor ingrese o cargue código fuente.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "Por favor ingrese o cargue código fuente.",
+                    "Advertencia",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
                 return;
             }
 
-            // Muestra de inserción manual en la tabla
-            dgvTokens.Rows.Add("TK_INT", "int", "int", 1, 1);
-            dgvTokens.Rows.Add("TK_ID", "edad", "[a-zA-Z_][a-zA-Z0-9_]*", 1, 5);
-            dgvTokens.Rows.Add("TK_ASIGNACION", "=", "=", 1, 10);
-            dgvTokens.Rows.Add("TK_NUM_ENTERO", "20", "[0-9]+", 1, 12);
+            AnalizadorLexico analizador = new AnalizadorLexico(codigo);
 
-            txtConsola.AppendText("[CONSOLA]: Análisis léxico finalizado exitosamente.\r\n");
+            analizador.Analizar();
+
+
+            foreach (Token token in analizador.Tokens)
+            {
+                dgvTokens.Rows.Add(
+                    token.Tipo.ToString(),
+                    token.Lexema,
+                    token.PatronRegex,
+                    token.Fila,
+                    token.Columna
+                );
+            }
+
+            if (analizador.Error.Count > 0)
+            {
+                txtConsola.AppendText(
+                    "[CONSOLA]: Se encontraron " +
+                    analizador.Error.Count +
+                    " error(es) léxico(s).\r\n"
+                );
+
+                foreach (ErrorLexico error in analizador.Error)
+                {
+                    txtConsola.AppendText(
+                        "Línea " + error.Fila +
+                        ", Columna " + error.Columna +
+                        ": " + error.Descripcion +
+                        " Lexema: " + error.LexemaError +
+                        "\r\n"
+                    );
+                }
+            }
+            else
+            {
+                txtConsola.AppendText(
+                    "[CONSOLA]: Análisis léxico finalizado exitosamente.\r\n"
+                );
+            }
         }
 
         private void btnCommit_Click(object sender, EventArgs e)
