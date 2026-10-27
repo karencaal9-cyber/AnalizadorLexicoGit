@@ -64,4 +64,5 @@ namespace AnalizadorLexicoGit.Lexer
             Fila = fila;
             Columna = columna;
         }
+    }
 }

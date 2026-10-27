@@ -167,7 +167,29 @@ namespace AnalizadorLexicoGit.Lexer
                     columnaInicio
                 ));
 
-                TablaSimbolos.Agregar(lexema, filaInicio);
+                string tipoSimbolo = "No especificado";
+
+                if (Tokens.Count >= 2)
+                {
+                    string anterior = Tokens[Tokens.Count - 2].Lexema;
+
+                    if (anterior == "int" ||
+                        anterior == "string" ||
+                        anterior == "double" ||
+                        anterior == "float" ||
+                        anterior == "char" ||
+                        anterior == "bool")
+                    {
+                        tipoSimbolo = anterior;
+                    }
+                }
+
+                TablaSimbolos.Agregar(
+                    lexema,
+                    tipoSimbolo,
+                    filaInicio,
+                    columnaInicio
+                );
             }
         }
 

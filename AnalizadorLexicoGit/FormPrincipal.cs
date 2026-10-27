@@ -17,6 +17,7 @@ namespace AnalizadorLexicoGit
         public Form1()
         {
             InitializeComponent();
+            ConfigurarTablaSimbolos();
             _gitControlador = new ControladorGit(AppDomain.CurrentDomain.BaseDirectory);
         }
 
@@ -53,10 +54,22 @@ namespace AnalizadorLexicoGit
                 txtEditorCodigo.Text = File.ReadAllText(dialog.FileName);
             }
         }
-
+        private void ConfigurarTablaSimbolos()
+        {
+            dgvSimbolos.Columns.Clear();
+            dgvSimbolos.AllowUserToAddRows = false;
+            dgvSimbolos.ReadOnly = true;
+            dgvSimbolos.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.Fill;
+            dgvSimbolos.Columns.Add("Nombre", "Identificador");
+            dgvSimbolos.Columns.Add("Tipo", "Tipo");
+            dgvSimbolos.Columns.Add("Fila", "Primera fila");
+            dgvSimbolos.Columns.Add("Columna", "Primera columna");
+        }
         private void btnAnalizar_Click(object sender, EventArgs e)
         {
             dgvTokens.Rows.Clear();
+            dgvSimbolos.Rows.Clear();
             txtConsola.Clear();
 
             string codigo = txtEditorCodigo.Text;
@@ -80,6 +93,17 @@ namespace AnalizadorLexicoGit
                     token.PatronRegex,
                     token.Fila,
                     token.Columna
+                );
+            }
+
+            foreach (Simbolo simbolo in
+         analizador.TablaSimbolos.ObtenerSimbolos())
+            {
+                dgvSimbolos.Rows.Add(
+                    simbolo.Nombre,
+                    simbolo.Tipo,
+                    simbolo.Fila,
+                    simbolo.Columna
                 );
             }
 
@@ -110,23 +134,24 @@ namespace AnalizadorLexicoGit
             }
         }
 
-        private void btnCommit_Click(object sender, EventArgs e)
+        private void txtMensajeCommit_TextChanged(object sender, EventArgs e)
         {
-            string mensaje = txtMensajeCommit.Text;
-            if (string.IsNullOrEmpty(mensaje))
-            {
-                MessageBox.Show("Ingrese un mensaje de commit.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
-            string resultado = _gitControlador.HacerCommit(mensaje);
-            txtConsola.AppendText($"[GIT COMMIT]: {resultado}\r\n");
         }
 
-        private void btnPush_Click(object sender, EventArgs e)
+        private void dgvTokens_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string resultado = _gitControlador.HacerPush();
-            txtConsola.AppendText($"[GIT PUSH]: {resultado}\r\n");
+
+        }
+
+        private void txtConsola_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtEditorCodigo_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

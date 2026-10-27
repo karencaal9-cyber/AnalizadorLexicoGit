@@ -34,8 +34,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtMensajeCommit = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnCommit = new System.Windows.Forms.Button();
-            this.btnPush = new System.Windows.Forms.Button();
             this.txtEditorCodigo = new System.Windows.Forms.RichTextBox();
             this.dgvTokens = new System.Windows.Forms.DataGridView();
             this.Token = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,7 +42,9 @@
             this.Fila = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Columna = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtConsola = new System.Windows.Forms.TextBox();
+            this.dgvSimbolos = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTokens)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAbrir
@@ -92,6 +92,7 @@
             this.txtMensajeCommit.Name = "txtMensajeCommit";
             this.txtMensajeCommit.Size = new System.Drawing.Size(135, 22);
             this.txtMensajeCommit.TabIndex = 4;
+            this.txtMensajeCommit.TextChanged += new System.EventHandler(this.txtMensajeCommit_TextChanged);
             // 
             // label3
             // 
@@ -102,34 +103,15 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "AVANCE ANALIZADOR";
             // 
-            // btnCommit
-            // 
-            this.btnCommit.Location = new System.Drawing.Point(465, 112);
-            this.btnCommit.Name = "btnCommit";
-            this.btnCommit.Size = new System.Drawing.Size(87, 39);
-            this.btnCommit.TabIndex = 6;
-            this.btnCommit.Text = "Git Commit";
-            this.btnCommit.UseVisualStyleBackColor = true;
-            this.btnCommit.Click += new System.EventHandler(this.btnCommit_Click);
-            // 
-            // btnPush
-            // 
-            this.btnPush.Location = new System.Drawing.Point(616, 112);
-            this.btnPush.Name = "btnPush";
-            this.btnPush.Size = new System.Drawing.Size(67, 39);
-            this.btnPush.TabIndex = 7;
-            this.btnPush.Text = "Git Push";
-            this.btnPush.UseVisualStyleBackColor = true;
-            this.btnPush.Click += new System.EventHandler(this.btnPush_Click);
-            // 
             // txtEditorCodigo
             // 
             this.txtEditorCodigo.Dock = System.Windows.Forms.DockStyle.Left;
             this.txtEditorCodigo.Location = new System.Drawing.Point(0, 0);
             this.txtEditorCodigo.Name = "txtEditorCodigo";
-            this.txtEditorCodigo.Size = new System.Drawing.Size(146, 562);
+            this.txtEditorCodigo.Size = new System.Drawing.Size(146, 886);
             this.txtEditorCodigo.TabIndex = 8;
             this.txtEditorCodigo.Text = "";
+            this.txtEditorCodigo.TextChanged += new System.EventHandler(this.txtEditorCodigo_TextChanged);
             // 
             // dgvTokens
             // 
@@ -144,8 +126,9 @@
             this.dgvTokens.Name = "dgvTokens";
             this.dgvTokens.RowHeadersWidth = 51;
             this.dgvTokens.RowTemplate.Height = 24;
-            this.dgvTokens.Size = new System.Drawing.Size(684, 247);
+            this.dgvTokens.Size = new System.Drawing.Size(694, 247);
             this.dgvTokens.TabIndex = 9;
+            this.dgvTokens.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTokens_CellContentClick);
             // 
             // Token
             // 
@@ -191,17 +174,27 @@
             this.txtConsola.Name = "txtConsola";
             this.txtConsola.Size = new System.Drawing.Size(684, 65);
             this.txtConsola.TabIndex = 10;
+            this.txtConsola.TextChanged += new System.EventHandler(this.txtConsola_TextChanged);
+            // 
+            // dgvSimbolos
+            // 
+            this.dgvSimbolos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSimbolos.Location = new System.Drawing.Point(174, 534);
+            this.dgvSimbolos.Name = "dgvSimbolos";
+            this.dgvSimbolos.RowHeadersWidth = 51;
+            this.dgvSimbolos.RowTemplate.Height = 24;
+            this.dgvSimbolos.Size = new System.Drawing.Size(694, 340);
+            this.dgvSimbolos.TabIndex = 11;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(953, 562);
+            this.ClientSize = new System.Drawing.Size(931, 886);
+            this.Controls.Add(this.dgvSimbolos);
             this.Controls.Add(this.txtConsola);
             this.Controls.Add(this.dgvTokens);
             this.Controls.Add(this.txtEditorCodigo);
-            this.Controls.Add(this.btnPush);
-            this.Controls.Add(this.btnCommit);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtMensajeCommit);
             this.Controls.Add(this.label2);
@@ -212,6 +205,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTokens)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,8 +219,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtMensajeCommit;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnCommit;
-        private System.Windows.Forms.Button btnPush;
         private System.Windows.Forms.RichTextBox txtEditorCodigo;
         private System.Windows.Forms.DataGridView dgvTokens;
         private System.Windows.Forms.DataGridViewTextBoxColumn Token;
@@ -235,6 +227,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Fila;
         private System.Windows.Forms.DataGridViewTextBoxColumn Columna;
         private System.Windows.Forms.TextBox txtConsola;
+        private System.Windows.Forms.DataGridView dgvSimbolos;
     }
 }
 
