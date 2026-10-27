@@ -3,6 +3,7 @@ using AnalizadorLexicoGit.Lexer;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -133,6 +134,19 @@ namespace AnalizadorLexicoGit
                     "[CONSOLA]: Análisis léxico finalizado exitosamente.\r\n"
                 );
             }
+
+            MostrarEstadisticas(analizador);
+        }
+
+        private void MostrarEstadisticas(AnalizadorLexico analizador)
+        {
+            int totalTokens = analizador.Tokens.Count;
+            int totalErrores = analizador.Error.Count;
+            int totalSimbolos = analizador.TablaSimbolos.ObtenerSimbolos().Count;
+
+            lblTotalTokens.Text = $"Total de Tokens: {totalTokens}";
+            lblTotalErrores.Text = $"Total Errores: {totalErrores}";
+            lblTotalSimbolos.Text = $"Total Símbolos: {totalSimbolos}";
         }
 
         private void txtMensajeCommit_TextChanged(object sender, EventArgs e)

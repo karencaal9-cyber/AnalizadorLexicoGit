@@ -44,6 +44,9 @@
             this.txtConsola = new System.Windows.Forms.TextBox();
             this.dgvSimbolos = new System.Windows.Forms.DataGridView();
             this.btnExportar = new System.Windows.Forms.Button();
+            this.lblTotalTokens = new System.Windows.Forms.Label();
+            this.lblTotalErrores = new System.Windows.Forms.Label();
+            this.lblTotalSimbolos = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTokens)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).BeginInit();
             this.SuspendLayout();
@@ -197,11 +200,41 @@
             this.btnExportar.UseVisualStyleBackColor = true;
             this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
+            // lblTotalTokens
+            // 
+            this.lblTotalTokens.AutoSize = true;
+            this.lblTotalTokens.Location = new System.Drawing.Point(930, 277);
+            this.lblTotalTokens.Name = "lblTotalTokens";
+            this.lblTotalTokens.Size = new System.Drawing.Size(112, 16);
+            this.lblTotalTokens.TabIndex = 13;
+            this.lblTotalTokens.Text = "Total de Tokens: ";
+            // 
+            // lblTotalErrores
+            // 
+            this.lblTotalErrores.AutoSize = true;
+            this.lblTotalErrores.Location = new System.Drawing.Point(930, 315);
+            this.lblTotalErrores.Name = "lblTotalErrores";
+            this.lblTotalErrores.Size = new System.Drawing.Size(88, 16);
+            this.lblTotalErrores.TabIndex = 14;
+            this.lblTotalErrores.Text = "Total Errores:";
+            // 
+            // lblTotalSimbolos
+            // 
+            this.lblTotalSimbolos.AutoSize = true;
+            this.lblTotalSimbolos.Location = new System.Drawing.Point(930, 355);
+            this.lblTotalSimbolos.Name = "lblTotalSimbolos";
+            this.lblTotalSimbolos.Size = new System.Drawing.Size(101, 16);
+            this.lblTotalSimbolos.TabIndex = 15;
+            this.lblTotalSimbolos.Text = "Total Simbolos:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(931, 886);
+            this.ClientSize = new System.Drawing.Size(1189, 886);
+            this.Controls.Add(this.lblTotalSimbolos);
+            this.Controls.Add(this.lblTotalErrores);
+            this.Controls.Add(this.lblTotalTokens);
             this.Controls.Add(this.btnExportar);
             this.Controls.Add(this.dgvSimbolos);
             this.Controls.Add(this.txtConsola);
@@ -241,6 +274,9 @@
         private System.Windows.Forms.TextBox txtConsola;
         private System.Windows.Forms.DataGridView dgvSimbolos;
         private System.Windows.Forms.Button btnExportar;
+        private System.Windows.Forms.Label lblTotalTokens;
+        private System.Windows.Forms.Label lblTotalErrores;
+        private System.Windows.Forms.Label lblTotalSimbolos;
     }
 }
 
