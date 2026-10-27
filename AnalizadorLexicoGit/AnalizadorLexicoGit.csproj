@@ -53,7 +53,10 @@
       <DependentUpon>FormPrincipal.cs</DependentUpon>
     </Compile>
     <Compile Include="GitService\ControladorGit.cs" />
+    <Compile Include="Lexer\AnalizadorLexico.cs" />
     <Compile Include="Lexer\ErrorLexico.cs" />
+    <Compile Include="Lexer\Simbolo.cs" />
+    <Compile Include="Lexer\TablaSimbolos.cs" />
     <Compile Include="Lexer\LectorArchivos.cs" />
     <Compile Include="Lexer\Token.cs" />
     <Compile Include="Program.cs" />

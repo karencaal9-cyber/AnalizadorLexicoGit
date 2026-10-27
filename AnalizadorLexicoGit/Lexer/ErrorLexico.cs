@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AnalizadorLexicoGit.Lexer
 {
 
-    internal class ErrorLexico
+    public class ErrorLexico
     {
 
             public string LexemaError { get; set; }

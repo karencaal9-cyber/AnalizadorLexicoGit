@@ -1,0 +1,13 @@
+int edad = 20;
+double promedio = 85.5;
+bool aprobado = false;
+
+if (promedio >= 60.0 && edad >= 18) {
+    aprobado = true;
+}
+
+for (int i = 0; i < 5; i++) {
+    promedio += 1.5;
+}
+
+string mensaje = "Resultado final";
