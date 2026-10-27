@@ -1,9 +1,10 @@
-﻿using System;
+﻿using AnalizadorLexicoGit.GitService;
+using AnalizadorLexicoGit.Lexer;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
-using AnalizadorLexicoGit.Lexer;
-using AnalizadorLexicoGit.GitService;
 
 namespace AnalizadorLexicoGit
 {
@@ -151,6 +152,52 @@ namespace AnalizadorLexicoGit
 
         private void txtEditorCodigo_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            if (dgvTokens.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay tokens para exportar.", "Advertencia");
+                return;
+            }
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Archivo CSV (*.csv)|*.csv|Archivo de texto (*.txt)|*.txt";
+            saveFileDialog.Title = "Reporte de tokens";
+            saveFileDialog.FileName = "ReporteTokens.csv";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    sb.AppendLine("Token,Lexema,Patron,Fila,Columna");
+
+                    foreach (DataGridViewRow row in dgvTokens.Rows)
+                    {
+                        if (row.IsNewRow) continue;
+
+                        string tipo = row.Cells[0].Value?.ToString() ?? "";
+                        string lexema = row.Cells[1].Value?.ToString() ?? "";
+                        string patron = row.Cells[2].Value?.ToString() ?? "";
+                        string fila = row.Cells[3].Value?.ToString() ?? "";
+                        string columna = row.Cells[4].Value?.ToString() ?? "";
+
+                        sb.AppendLine($"{tipo},{lexema},{patron},{fila},{columna}");
+                    }
+
+                    File.WriteAllText(saveFileDialog.FileName, sb.ToString(), Encoding.UTF8);
+
+                    MessageBox.Show("¡Archivo exportado con éxito!", "Información");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al exportar el archivo: " + ex.Message, "Error");
+                }
+            }
 
         }
     }

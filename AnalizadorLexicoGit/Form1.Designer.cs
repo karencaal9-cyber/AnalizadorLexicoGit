@@ -43,6 +43,7 @@
             this.Columna = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtConsola = new System.Windows.Forms.TextBox();
             this.dgvSimbolos = new System.Windows.Forms.DataGridView();
+            this.btnExportar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTokens)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).BeginInit();
             this.SuspendLayout();
@@ -61,7 +62,7 @@
             // 
             this.btnAnalizar.Location = new System.Drawing.Point(353, 112);
             this.btnAnalizar.Name = "btnAnalizar";
-            this.btnAnalizar.Size = new System.Drawing.Size(67, 39);
+            this.btnAnalizar.Size = new System.Drawing.Size(85, 39);
             this.btnAnalizar.TabIndex = 1;
             this.btnAnalizar.Text = "Analizar";
             this.btnAnalizar.UseVisualStyleBackColor = true;
@@ -70,7 +71,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(148, 62);
+            this.label1.Location = new System.Drawing.Point(275, 57);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 16);
             this.label1.TabIndex = 2;
@@ -79,7 +80,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(152, 135);
+            this.label2.Location = new System.Drawing.Point(148, 123);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(178, 16);
             this.label2.TabIndex = 3;
@@ -172,7 +173,7 @@
             this.txtConsola.Location = new System.Drawing.Point(174, 447);
             this.txtConsola.Multiline = true;
             this.txtConsola.Name = "txtConsola";
-            this.txtConsola.Size = new System.Drawing.Size(684, 65);
+            this.txtConsola.Size = new System.Drawing.Size(694, 65);
             this.txtConsola.TabIndex = 10;
             this.txtConsola.TextChanged += new System.EventHandler(this.txtConsola_TextChanged);
             // 
@@ -186,11 +187,22 @@
             this.dgvSimbolos.Size = new System.Drawing.Size(694, 340);
             this.dgvSimbolos.TabIndex = 11;
             // 
+            // btnExportar
+            // 
+            this.btnExportar.Location = new System.Drawing.Point(630, 112);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(125, 39);
+            this.btnExportar.TabIndex = 12;
+            this.btnExportar.Text = "Exportar informe";
+            this.btnExportar.UseVisualStyleBackColor = true;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(931, 886);
+            this.Controls.Add(this.btnExportar);
             this.Controls.Add(this.dgvSimbolos);
             this.Controls.Add(this.txtConsola);
             this.Controls.Add(this.dgvTokens);
@@ -228,6 +240,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Columna;
         private System.Windows.Forms.TextBox txtConsola;
         private System.Windows.Forms.DataGridView dgvSimbolos;
+        private System.Windows.Forms.Button btnExportar;
     }
 }
 
