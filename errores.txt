@@ -1,0 +1,4 @@
+Carácter no reconocido en el código fuente
+Cadena de caracteres sin comilla de cierre
+Número decimal mal formado
+Comentario de bloque sin cerrar

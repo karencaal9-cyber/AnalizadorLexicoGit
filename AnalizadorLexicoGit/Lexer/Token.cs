@@ -43,6 +43,3 @@ namespace AnalizadorLexicoGit.Lexer
         }
     }
 }
-internal class Token
-    {
-}

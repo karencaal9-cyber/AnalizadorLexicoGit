@@ -9,6 +9,10 @@ namespace AnalizadorLexicoGit
 {
     public partial class Form1 : Form
     {
+        private HashSet<string> palabrasReservadas;
+        private List<string> tiposTokens;
+        private List<string> erroresConfig;
+
         private ControladorGit _gitControlador;
         public Form1()
         {
@@ -24,7 +28,19 @@ namespace AnalizadorLexicoGit
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            try
+            {
+                LectorArchivos lector = new LectorArchivos();
 
+                palabrasReservadas = lector.CargarPalabrasReservadas("palabras_reservadas.txt");
+                tiposTokens = lector.CargarTiposTokens("tipo_token.txt");
+                
+                MessageBox.Show("¡Archivos de configuración cargados con éxito en memoria!", "Éxito");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los archivos de configuración: " + ex.Message, "Error crítico");
+            }
         }
 
         private void btnAbrir_Click(object sender, EventArgs e)
@@ -51,7 +67,6 @@ namespace AnalizadorLexicoGit
                 return;
             }
 
-            // Muestra de inserción manual en la tabla
             dgvTokens.Rows.Add("TK_INT", "int", "int", 1, 1);
             dgvTokens.Rows.Add("TK_ID", "edad", "[a-zA-Z_][a-zA-Z0-9_]*", 1, 5);
             dgvTokens.Rows.Add("TK_ASIGNACION", "=", "=", 1, 10);
