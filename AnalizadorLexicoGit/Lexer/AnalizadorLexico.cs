@@ -8,6 +8,26 @@ namespace AnalizadorLexicoGit.Lexer
 {
     public class AnalizadorLexico
     {
+        // Contadores para el panel estadístico
+        public int TotalTokensVálidos { get; set; } = 0;
+        public int TotalLineasProcesadas { get; set; } = 0;
+        public int TotalErroresLexicos { get; set; } = 0;
+        public double TiempoAnalisisMs { get; set; } = 0;
+
+        // Diccionario o contadores por categoría de tokens
+        public Dictionary<string, int> ConteoPorCategoria { get; set; } = new Dictionary<string, int>();
+
+        // Método principal de análisis
+        public void Analizar(string codigoFuente)
+        {
+            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+
+            // Lógica de análisis léxico, reconocimiento de tokens y errores...
+            // (Incrementar TotalTokensVálidos, TotalLineasProcesadas, TotalErroresLexicos según corresponda)
+
+            stopwatch.Stop();
+            TiempoAnalisisMs = stopwatch.ElapsedMilliseconds;
+        }
         private readonly HashSet<string> palabrasReservadas;
 
         private string _codigo;

@@ -11,6 +11,7 @@ namespace AnalizadorLexicoGit
 {
     public partial class Form1 : Form
     {
+        private AnalizadorLexico analizador;
         private HashSet<string> palabrasReservadas;
         private List<string> tiposTokens;
         private List<string> erroresConfig;
@@ -135,7 +136,31 @@ namespace AnalizadorLexicoGit
                 );
             }
 
+            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+            analizador.Analizar(); 
+            stopwatch.Stop();
+            long tiempoMs = stopwatch.ElapsedMilliseconds;
+
+            string codigoFuente = txtEditorCodigo.Text; 
+            analizador.Analizar(codigoFuente);
+
+            MostrarPanelEstadisticas(analizador);
             MostrarEstadisticas(analizador);
+           
+        }
+
+        private void MostrarPanelEstadisticas(AnalizadorLexico analizador)
+        {
+            if (analizador == null) return;
+
+            int totalTokensP = analizador.Tokens.Count;
+            int totalErroresP = analizador.Error.Count;
+            int totalLineasP = txtEditorCodigo.Lines.Length; // O la forma en que calcules las líneas
+
+            lblTotalTokensP.Text = $"Tokens Válidos: {totalTokensP}";
+            lblTotalLineasP.Text = $"Líneas Totales: {totalLineasP}";
+            lblTotalErroresP.Text = $"Errores Léxicos: {totalErroresP}";
+            lblTiempoP.Text = $"Tiempo de Análisis: {analizador.TiempoAnalisisMs} ms";
         }
 
         private void MostrarEstadisticas(AnalizadorLexico analizador)

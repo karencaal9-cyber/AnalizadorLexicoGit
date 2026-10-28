@@ -47,8 +47,14 @@
             this.lblTotalTokens = new System.Windows.Forms.Label();
             this.lblTotalErrores = new System.Windows.Forms.Label();
             this.lblTotalSimbolos = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblTotalTokensP = new System.Windows.Forms.Label();
+            this.lblTotalLineasP = new System.Windows.Forms.Label();
+            this.lblTotalErroresP = new System.Windows.Forms.Label();
+            this.lblTiempoP = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTokens)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAbrir
@@ -112,7 +118,7 @@
             this.txtEditorCodigo.Dock = System.Windows.Forms.DockStyle.Left;
             this.txtEditorCodigo.Location = new System.Drawing.Point(0, 0);
             this.txtEditorCodigo.Name = "txtEditorCodigo";
-            this.txtEditorCodigo.Size = new System.Drawing.Size(146, 886);
+            this.txtEditorCodigo.Size = new System.Drawing.Size(146, 885);
             this.txtEditorCodigo.TabIndex = 8;
             this.txtEditorCodigo.Text = "";
             this.txtEditorCodigo.TextChanged += new System.EventHandler(this.txtEditorCodigo_TextChanged);
@@ -227,11 +233,62 @@
             this.lblTotalSimbolos.TabIndex = 15;
             this.lblTotalSimbolos.Text = "Total Simbolos:";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblTiempoP);
+            this.groupBox1.Controls.Add(this.lblTotalErroresP);
+            this.groupBox1.Controls.Add(this.lblTotalLineasP);
+            this.groupBox1.Controls.Add(this.lblTotalTokensP);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(904, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(489, 245);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Panel Estadistico";
+            // 
+            // lblTotalTokensP
+            // 
+            this.lblTotalTokensP.AutoSize = true;
+            this.lblTotalTokensP.Location = new System.Drawing.Point(48, 49);
+            this.lblTotalTokensP.Name = "lblTotalTokensP";
+            this.lblTotalTokensP.Size = new System.Drawing.Size(153, 25);
+            this.lblTotalTokensP.TabIndex = 0;
+            this.lblTotalTokensP.Text = "Total de Tokens:";
+            // 
+            // lblTotalLineasP
+            // 
+            this.lblTotalLineasP.AutoSize = true;
+            this.lblTotalLineasP.Location = new System.Drawing.Point(48, 98);
+            this.lblTotalLineasP.Name = "lblTotalLineasP";
+            this.lblTotalLineasP.Size = new System.Drawing.Size(145, 25);
+            this.lblTotalLineasP.TabIndex = 1;
+            this.lblTotalLineasP.Text = "Total de Lineas:";
+            // 
+            // lblTotalErroresP
+            // 
+            this.lblTotalErroresP.AutoSize = true;
+            this.lblTotalErroresP.Location = new System.Drawing.Point(48, 140);
+            this.lblTotalErroresP.Name = "lblTotalErroresP";
+            this.lblTotalErroresP.Size = new System.Drawing.Size(153, 25);
+            this.lblTotalErroresP.TabIndex = 2;
+            this.lblTotalErroresP.Text = "Total de errores:";
+            // 
+            // lblTiempoP
+            // 
+            this.lblTiempoP.AutoSize = true;
+            this.lblTiempoP.Location = new System.Drawing.Point(48, 180);
+            this.lblTiempoP.Name = "lblTiempoP";
+            this.lblTiempoP.Size = new System.Drawing.Size(179, 25);
+            this.lblTiempoP.TabIndex = 3;
+            this.lblTiempoP.Text = "Tiempo de Analisis:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1189, 886);
+            this.ClientSize = new System.Drawing.Size(1569, 885);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblTotalSimbolos);
             this.Controls.Add(this.lblTotalErrores);
             this.Controls.Add(this.lblTotalTokens);
@@ -251,6 +308,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTokens)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -277,6 +336,11 @@
         private System.Windows.Forms.Label lblTotalTokens;
         private System.Windows.Forms.Label lblTotalErrores;
         private System.Windows.Forms.Label lblTotalSimbolos;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblTiempoP;
+        private System.Windows.Forms.Label lblTotalErroresP;
+        private System.Windows.Forms.Label lblTotalLineasP;
+        private System.Windows.Forms.Label lblTotalTokensP;
     }
 }
 
