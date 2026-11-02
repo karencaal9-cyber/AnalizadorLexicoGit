@@ -145,7 +145,6 @@ namespace AnalizadorLexicoGit
             analizador.Analizar(codigoFuente);
 
             MostrarPanelEstadisticas(analizador);
-            MostrarEstadisticas(analizador);
            
         }
 
@@ -163,16 +162,6 @@ namespace AnalizadorLexicoGit
             lblTiempoP.Text = $"Tiempo de Análisis: {analizador.TiempoAnalisisMs} ms";
         }
 
-        private void MostrarEstadisticas(AnalizadorLexico analizador)
-        {
-            int totalTokens = analizador.Tokens.Count;
-            int totalErrores = analizador.Error.Count;
-            int totalSimbolos = analizador.TablaSimbolos.ObtenerSimbolos().Count;
-
-            lblTotalTokens.Text = $"Total de Tokens: {totalTokens}";
-            lblTotalErrores.Text = $"Total Errores: {totalErrores}";
-            lblTotalSimbolos.Text = $"Total Símbolos: {totalSimbolos}";
-        }
 
         private void txtMensajeCommit_TextChanged(object sender, EventArgs e)
         {

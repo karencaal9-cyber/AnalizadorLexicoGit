@@ -44,14 +44,11 @@
             this.txtConsola = new System.Windows.Forms.TextBox();
             this.dgvSimbolos = new System.Windows.Forms.DataGridView();
             this.btnExportar = new System.Windows.Forms.Button();
-            this.lblTotalTokens = new System.Windows.Forms.Label();
-            this.lblTotalErrores = new System.Windows.Forms.Label();
-            this.lblTotalSimbolos = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblTotalTokensP = new System.Windows.Forms.Label();
-            this.lblTotalLineasP = new System.Windows.Forms.Label();
-            this.lblTotalErroresP = new System.Windows.Forms.Label();
             this.lblTiempoP = new System.Windows.Forms.Label();
+            this.lblTotalErroresP = new System.Windows.Forms.Label();
+            this.lblTotalLineasP = new System.Windows.Forms.Label();
+            this.lblTotalTokensP = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTokens)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -206,33 +203,6 @@
             this.btnExportar.UseVisualStyleBackColor = true;
             this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
-            // lblTotalTokens
-            // 
-            this.lblTotalTokens.AutoSize = true;
-            this.lblTotalTokens.Location = new System.Drawing.Point(930, 277);
-            this.lblTotalTokens.Name = "lblTotalTokens";
-            this.lblTotalTokens.Size = new System.Drawing.Size(112, 16);
-            this.lblTotalTokens.TabIndex = 13;
-            this.lblTotalTokens.Text = "Total de Tokens: ";
-            // 
-            // lblTotalErrores
-            // 
-            this.lblTotalErrores.AutoSize = true;
-            this.lblTotalErrores.Location = new System.Drawing.Point(930, 315);
-            this.lblTotalErrores.Name = "lblTotalErrores";
-            this.lblTotalErrores.Size = new System.Drawing.Size(88, 16);
-            this.lblTotalErrores.TabIndex = 14;
-            this.lblTotalErrores.Text = "Total Errores:";
-            // 
-            // lblTotalSimbolos
-            // 
-            this.lblTotalSimbolos.AutoSize = true;
-            this.lblTotalSimbolos.Location = new System.Drawing.Point(930, 355);
-            this.lblTotalSimbolos.Name = "lblTotalSimbolos";
-            this.lblTotalSimbolos.Size = new System.Drawing.Size(101, 16);
-            this.lblTotalSimbolos.TabIndex = 15;
-            this.lblTotalSimbolos.Text = "Total Simbolos:";
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.lblTiempoP);
@@ -240,48 +210,48 @@
             this.groupBox1.Controls.Add(this.lblTotalLineasP);
             this.groupBox1.Controls.Add(this.lblTotalTokensP);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(904, 12);
+            this.groupBox1.Location = new System.Drawing.Point(903, 267);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(489, 245);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Panel Estadistico";
             // 
-            // lblTotalTokensP
+            // lblTiempoP
             // 
-            this.lblTotalTokensP.AutoSize = true;
-            this.lblTotalTokensP.Location = new System.Drawing.Point(48, 49);
-            this.lblTotalTokensP.Name = "lblTotalTokensP";
-            this.lblTotalTokensP.Size = new System.Drawing.Size(153, 25);
-            this.lblTotalTokensP.TabIndex = 0;
-            this.lblTotalTokensP.Text = "Total de Tokens:";
-            // 
-            // lblTotalLineasP
-            // 
-            this.lblTotalLineasP.AutoSize = true;
-            this.lblTotalLineasP.Location = new System.Drawing.Point(48, 98);
-            this.lblTotalLineasP.Name = "lblTotalLineasP";
-            this.lblTotalLineasP.Size = new System.Drawing.Size(145, 25);
-            this.lblTotalLineasP.TabIndex = 1;
-            this.lblTotalLineasP.Text = "Total de Lineas:";
+            this.lblTiempoP.AutoSize = true;
+            this.lblTiempoP.Location = new System.Drawing.Point(48, 180);
+            this.lblTiempoP.Name = "lblTiempoP";
+            this.lblTiempoP.Size = new System.Drawing.Size(191, 26);
+            this.lblTiempoP.TabIndex = 3;
+            this.lblTiempoP.Text = "Tiempo de Analisis:";
             // 
             // lblTotalErroresP
             // 
             this.lblTotalErroresP.AutoSize = true;
             this.lblTotalErroresP.Location = new System.Drawing.Point(48, 140);
             this.lblTotalErroresP.Name = "lblTotalErroresP";
-            this.lblTotalErroresP.Size = new System.Drawing.Size(153, 25);
+            this.lblTotalErroresP.Size = new System.Drawing.Size(162, 26);
             this.lblTotalErroresP.TabIndex = 2;
             this.lblTotalErroresP.Text = "Total de errores:";
             // 
-            // lblTiempoP
+            // lblTotalLineasP
             // 
-            this.lblTiempoP.AutoSize = true;
-            this.lblTiempoP.Location = new System.Drawing.Point(48, 180);
-            this.lblTiempoP.Name = "lblTiempoP";
-            this.lblTiempoP.Size = new System.Drawing.Size(179, 25);
-            this.lblTiempoP.TabIndex = 3;
-            this.lblTiempoP.Text = "Tiempo de Analisis:";
+            this.lblTotalLineasP.AutoSize = true;
+            this.lblTotalLineasP.Location = new System.Drawing.Point(48, 98);
+            this.lblTotalLineasP.Name = "lblTotalLineasP";
+            this.lblTotalLineasP.Size = new System.Drawing.Size(156, 26);
+            this.lblTotalLineasP.TabIndex = 1;
+            this.lblTotalLineasP.Text = "Total de Lineas:";
+            // 
+            // lblTotalTokensP
+            // 
+            this.lblTotalTokensP.AutoSize = true;
+            this.lblTotalTokensP.Location = new System.Drawing.Point(48, 49);
+            this.lblTotalTokensP.Name = "lblTotalTokensP";
+            this.lblTotalTokensP.Size = new System.Drawing.Size(163, 26);
+            this.lblTotalTokensP.TabIndex = 0;
+            this.lblTotalTokensP.Text = "Total de Tokens:";
             // 
             // Form1
             // 
@@ -289,9 +259,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1569, 885);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.lblTotalSimbolos);
-            this.Controls.Add(this.lblTotalErrores);
-            this.Controls.Add(this.lblTotalTokens);
             this.Controls.Add(this.btnExportar);
             this.Controls.Add(this.dgvSimbolos);
             this.Controls.Add(this.txtConsola);
@@ -333,9 +300,6 @@
         private System.Windows.Forms.TextBox txtConsola;
         private System.Windows.Forms.DataGridView dgvSimbolos;
         private System.Windows.Forms.Button btnExportar;
-        private System.Windows.Forms.Label lblTotalTokens;
-        private System.Windows.Forms.Label lblTotalErrores;
-        private System.Windows.Forms.Label lblTotalSimbolos;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblTiempoP;
         private System.Windows.Forms.Label lblTotalErroresP;
