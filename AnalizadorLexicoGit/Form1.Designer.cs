@@ -32,8 +32,6 @@
             this.btnAnalizar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtMensajeCommit = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.txtEditorCodigo = new System.Windows.Forms.RichTextBox();
             this.dgvTokens = new System.Windows.Forms.DataGridView();
             this.Token = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,9 +47,18 @@
             this.lblTotalErroresP = new System.Windows.Forms.Label();
             this.lblTotalLineasP = new System.Windows.Forms.Label();
             this.lblTotalTokensP = new System.Windows.Forms.Label();
+            this.grpDiccionario = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dgvPalabras = new System.Windows.Forms.DataGridView();
+            this.txtPalabra = new System.Windows.Forms.TextBox();
+            this.btnAgregarPalabra = new System.Windows.Forms.Button();
+            this.btnModificarPalabra = new System.Windows.Forms.Button();
+            this.btnEliminarPalabra = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTokens)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.grpDiccionario.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPalabras)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAbrir
@@ -92,23 +99,6 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "▶ EJECUTAR ANALIZADOR";
             this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // txtMensajeCommit
-            // 
-            this.txtMensajeCommit.Location = new System.Drawing.Point(620, 51);
-            this.txtMensajeCommit.Name = "txtMensajeCommit";
-            this.txtMensajeCommit.Size = new System.Drawing.Size(135, 22);
-            this.txtMensajeCommit.TabIndex = 4;
-            this.txtMensajeCommit.TextChanged += new System.EventHandler(this.txtMensajeCommit_TextChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(453, 57);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(150, 16);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "AVANCE ANALIZADOR";
             // 
             // txtEditorCodigo
             // 
@@ -192,6 +182,7 @@
             this.dgvSimbolos.RowTemplate.Height = 24;
             this.dgvSimbolos.Size = new System.Drawing.Size(694, 340);
             this.dgvSimbolos.TabIndex = 11;
+            this.dgvSimbolos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSimbolos_CellContentClick);
             // 
             // btnExportar
             // 
@@ -210,7 +201,7 @@
             this.groupBox1.Controls.Add(this.lblTotalLineasP);
             this.groupBox1.Controls.Add(this.lblTotalTokensP);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(903, 267);
+            this.groupBox1.Location = new System.Drawing.Point(891, 103);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(489, 245);
             this.groupBox1.TabIndex = 16;
@@ -222,7 +213,7 @@
             this.lblTiempoP.AutoSize = true;
             this.lblTiempoP.Location = new System.Drawing.Point(48, 180);
             this.lblTiempoP.Name = "lblTiempoP";
-            this.lblTiempoP.Size = new System.Drawing.Size(191, 26);
+            this.lblTiempoP.Size = new System.Drawing.Size(179, 25);
             this.lblTiempoP.TabIndex = 3;
             this.lblTiempoP.Text = "Tiempo de Analisis:";
             // 
@@ -231,7 +222,7 @@
             this.lblTotalErroresP.AutoSize = true;
             this.lblTotalErroresP.Location = new System.Drawing.Point(48, 140);
             this.lblTotalErroresP.Name = "lblTotalErroresP";
-            this.lblTotalErroresP.Size = new System.Drawing.Size(162, 26);
+            this.lblTotalErroresP.Size = new System.Drawing.Size(153, 25);
             this.lblTotalErroresP.TabIndex = 2;
             this.lblTotalErroresP.Text = "Total de errores:";
             // 
@@ -240,7 +231,7 @@
             this.lblTotalLineasP.AutoSize = true;
             this.lblTotalLineasP.Location = new System.Drawing.Point(48, 98);
             this.lblTotalLineasP.Name = "lblTotalLineasP";
-            this.lblTotalLineasP.Size = new System.Drawing.Size(156, 26);
+            this.lblTotalLineasP.Size = new System.Drawing.Size(145, 25);
             this.lblTotalLineasP.TabIndex = 1;
             this.lblTotalLineasP.Text = "Total de Lineas:";
             // 
@@ -249,23 +240,99 @@
             this.lblTotalTokensP.AutoSize = true;
             this.lblTotalTokensP.Location = new System.Drawing.Point(48, 49);
             this.lblTotalTokensP.Name = "lblTotalTokensP";
-            this.lblTotalTokensP.Size = new System.Drawing.Size(163, 26);
+            this.lblTotalTokensP.Size = new System.Drawing.Size(153, 25);
             this.lblTotalTokensP.TabIndex = 0;
             this.lblTotalTokensP.Text = "Total de Tokens:";
+            // 
+            // grpDiccionario
+            // 
+            this.grpDiccionario.Controls.Add(this.btnEliminarPalabra);
+            this.grpDiccionario.Controls.Add(this.btnModificarPalabra);
+            this.grpDiccionario.Controls.Add(this.btnAgregarPalabra);
+            this.grpDiccionario.Controls.Add(this.txtPalabra);
+            this.grpDiccionario.Controls.Add(this.dgvPalabras);
+            this.grpDiccionario.Location = new System.Drawing.Point(891, 354);
+            this.grpDiccionario.Name = "grpDiccionario";
+            this.grpDiccionario.Size = new System.Drawing.Size(654, 473);
+            this.grpDiccionario.TabIndex = 17;
+            this.grpDiccionario.TabStop = false;
+            this.grpDiccionario.Text = "Diccionario de palabras reservadas";
+            this.grpDiccionario.Enter += new System.EventHandler(this.grpDiccionario_Enter);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Location = new System.Drawing.Point(1572, 137);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 100);
+            this.groupBox2.TabIndex = 18;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "groupBox2";
+            // 
+            // dgvPalabras
+            // 
+            this.dgvPalabras.AllowUserToAddRows = false;
+            this.dgvPalabras.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvPalabras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPalabras.Location = new System.Drawing.Point(6, 51);
+            this.dgvPalabras.MultiSelect = false;
+            this.dgvPalabras.Name = "dgvPalabras";
+            this.dgvPalabras.ReadOnly = true;
+            this.dgvPalabras.RowHeadersWidth = 51;
+            this.dgvPalabras.RowTemplate.Height = 24;
+            this.dgvPalabras.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullColumnSelect;
+            this.dgvPalabras.Size = new System.Drawing.Size(629, 338);
+            this.dgvPalabras.TabIndex = 0;
+            // 
+            // txtPalabra
+            // 
+            this.txtPalabra.Location = new System.Drawing.Point(21, 23);
+            this.txtPalabra.Name = "txtPalabra";
+            this.txtPalabra.Size = new System.Drawing.Size(299, 22);
+            this.txtPalabra.TabIndex = 1;
+            // 
+            // btnAgregarPalabra
+            // 
+            this.btnAgregarPalabra.Location = new System.Drawing.Point(32, 411);
+            this.btnAgregarPalabra.Name = "btnAgregarPalabra";
+            this.btnAgregarPalabra.Size = new System.Drawing.Size(113, 39);
+            this.btnAgregarPalabra.TabIndex = 2;
+            this.btnAgregarPalabra.Text = "AGREGAR";
+            this.btnAgregarPalabra.UseVisualStyleBackColor = true;
+            this.btnAgregarPalabra.Click += new System.EventHandler(this.btnAgregarPalabra_Click);
+            // 
+            // btnModificarPalabra
+            // 
+            this.btnModificarPalabra.Location = new System.Drawing.Point(169, 411);
+            this.btnModificarPalabra.Name = "btnModificarPalabra";
+            this.btnModificarPalabra.Size = new System.Drawing.Size(113, 39);
+            this.btnModificarPalabra.TabIndex = 3;
+            this.btnModificarPalabra.Text = "MODIFICAR";
+            this.btnModificarPalabra.UseVisualStyleBackColor = true;
+            this.btnModificarPalabra.Click += new System.EventHandler(this.btnModificarPalabra_Click);
+            // 
+            // btnEliminarPalabra
+            // 
+            this.btnEliminarPalabra.Location = new System.Drawing.Point(298, 411);
+            this.btnEliminarPalabra.Name = "btnEliminarPalabra";
+            this.btnEliminarPalabra.Size = new System.Drawing.Size(113, 39);
+            this.btnEliminarPalabra.TabIndex = 4;
+            this.btnEliminarPalabra.Text = "ELIMINAR{";
+            this.btnEliminarPalabra.UseVisualStyleBackColor = true;
+            this.btnEliminarPalabra.Click += new System.EventHandler(this.btnEliminarPalabra_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1569, 885);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.grpDiccionario);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnExportar);
             this.Controls.Add(this.dgvSimbolos);
             this.Controls.Add(this.txtConsola);
             this.Controls.Add(this.dgvTokens);
             this.Controls.Add(this.txtEditorCodigo);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtMensajeCommit);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnAnalizar);
@@ -277,6 +344,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.grpDiccionario.ResumeLayout(false);
+            this.grpDiccionario.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPalabras)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -288,8 +358,6 @@
         private System.Windows.Forms.Button btnAnalizar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtMensajeCommit;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RichTextBox txtEditorCodigo;
         private System.Windows.Forms.DataGridView dgvTokens;
         private System.Windows.Forms.DataGridViewTextBoxColumn Token;
@@ -305,6 +373,13 @@
         private System.Windows.Forms.Label lblTotalErroresP;
         private System.Windows.Forms.Label lblTotalLineasP;
         private System.Windows.Forms.Label lblTotalTokensP;
+        private System.Windows.Forms.GroupBox grpDiccionario;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txtPalabra;
+        private System.Windows.Forms.DataGridView dgvPalabras;
+        private System.Windows.Forms.Button btnAgregarPalabra;
+        private System.Windows.Forms.Button btnEliminarPalabra;
+        private System.Windows.Forms.Button btnModificarPalabra;
     }
 }
 
