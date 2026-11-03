@@ -11,26 +11,40 @@ namespace AnalizadorLexicoGit.Lexer
     {
         public HashSet<string> CargarPalabrasReservadas(string rutaArchivo)
         {
-            HashSet<string> palabras = new HashSet<string>();
-
-            if (File.Exists(rutaArchivo))
+            if (!File.Exists(rutaArchivo))
             {
-                string[] lineas = File.ReadAllLines(rutaArchivo);
-                foreach (string linea in lineas)
-                {
-                    string palabraLimpia = linea.Trim();
-                    if (!string.IsNullOrEmpty(palabraLimpia))
-                    {
-                        palabras.Add(palabraLimpia);
-                    }
-                }
+                throw new FileNotFoundException(
+                    $"No se encontró el archivo de palabras reservadas en: {rutaArchivo}");
             }
-            else
+
+            HashSet<string> palabras = new HashSet<string>(
+                StringComparer.OrdinalIgnoreCase
+            );
+
+            string[] lineas = File.ReadAllLines(rutaArchivo);
+
+            foreach (string linea in lineas)
             {
-                throw new FileNotFoundException($"No se encontró el archivo de palabras reservadas en: {rutaArchivo}");
+                string palabra = linea.Trim();
+
+                if (!string.IsNullOrEmpty(palabra))
+                    palabras.Add(palabra);
             }
 
             return palabras;
+        }
+
+        public void GuardarPalabrasReservadas(
+            string rutaArchivo, IEnumerable<string> palabras)
+        {
+            if (palabras == null)
+                throw new ArgumentNullException(nameof(palabras));
+
+            File.WriteAllLines(
+                rutaArchivo,
+                palabras.OrderBy(p => p),
+                System.Text.Encoding.UTF8
+            );
         }
 
         public List<string> CargarTiposTokens(string rutaArchivo)
@@ -40,18 +54,19 @@ namespace AnalizadorLexicoGit.Lexer
             if (File.Exists(rutaArchivo))
             {
                 string[] lineas = File.ReadAllLines(rutaArchivo);
+
                 foreach (string linea in lineas)
                 {
-                    string tipoLimpio = linea.Trim();
-                    if (!string.IsNullOrEmpty(tipoLimpio))
-                    {
-                        tipos.Add(tipoLimpio);
-                    }
+                    string tipo = linea.Trim();
+
+                    if (!string.IsNullOrEmpty(tipo))
+                        tipos.Add(tipo);
                 }
             }
             else
             {
-                throw new FileNotFoundException($"No se encontró el archivo de tipos de token en: {rutaArchivo}");
+                throw new FileNotFoundException(
+                    $"No se encontró el archivo de tipos de token en: {rutaArchivo}");
             }
 
             return tipos;

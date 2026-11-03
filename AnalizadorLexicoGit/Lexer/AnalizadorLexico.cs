@@ -8,16 +8,11 @@ namespace AnalizadorLexicoGit.Lexer
 {
     public class AnalizadorLexico
     {
-        // Contadores para el panel estadístico
         public double TiempoAnalisisMs { get; set; } = 0;
 
-        // Método principal de análisis
         public void Analizar(string codigoFuente)
         {
             var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-
-            // Lógica de análisis léxico, reconocimiento de tokens y errores...
-            // (Incrementar TotalTokensVálidos, TotalLineasProcesadas, TotalErroresLexicos según corresponda)
 
             stopwatch.Stop();
             TiempoAnalisisMs = stopwatch.ElapsedMilliseconds;
@@ -36,7 +31,10 @@ namespace AnalizadorLexicoGit.Lexer
         public AnalizadorLexico(string codigo, HashSet<string> palabrasReservadasExternas)
         {
             _codigo = codigo;
-            this.palabrasReservadas = palabrasReservadasExternas;
+            this.palabrasReservadas = new HashSet<string>(
+                palabrasReservadasExternas ?? new HashSet<string>(),
+                StringComparer.OrdinalIgnoreCase
+            );
             _posicion = 0;
             _fila = 1;
             _columna = 1;
@@ -44,6 +42,58 @@ namespace AnalizadorLexicoGit.Lexer
             Tokens = new List<Token>();
             Error = new List<ErrorLexico>();
             TablaSimbolos = new TablaSimbolos();
+        }
+
+        public List<string> ObtenerPalabrasReservadas()
+        {
+            return palabrasReservadas.OrderBy(p => p).ToList();
+        }
+
+        public bool AgregarPalabraReservada(string palabra)
+        {
+            if (!EsPalabraValida(palabra))
+                return false;
+
+            return palabrasReservadas.Add(palabra.Trim());
+        }
+
+        public bool ModificarPalabraReservada(string anterior, string nueva)
+        {
+            if (string.IsNullOrWhiteSpace(anterior) ||
+                !EsPalabraValida(nueva))
+                return false;
+
+            if (!palabrasReservadas.Contains(anterior.Trim()))
+                return false;
+
+            if (palabrasReservadas.Contains(nueva.Trim()))
+                return false;
+
+            palabrasReservadas.Remove(anterior.Trim());
+            palabrasReservadas.Add(nueva.Trim());
+
+            return true;
+        }
+
+        public bool EliminarPalabraReservada(string palabra)
+        {
+            if (string.IsNullOrWhiteSpace(palabra))
+                return false;
+
+            return palabrasReservadas.Remove(palabra.Trim());
+        }
+
+        private bool EsPalabraValida(string palabra)
+        {
+            if (string.IsNullOrWhiteSpace(palabra))
+                return false;
+
+            palabra = palabra.Trim();
+
+            if (!(char.IsLetter(palabra[0]) || palabra[0] == '_'))
+                return false;
+
+            return palabra.All(c => char.IsLetterOrDigit(c) || c == '_');
         }
 
         public void Analizar()
