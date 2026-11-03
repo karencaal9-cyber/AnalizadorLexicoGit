@@ -2,10 +2,12 @@
 using AnalizadorLexicoGit.Lexer;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ClosedXML.Excel;
 
 namespace AnalizadorLexicoGit
 {
@@ -252,41 +254,50 @@ namespace AnalizadorLexicoGit
             }
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Archivo CSV (*.csv)|*.csv|Archivo de texto (*.txt)|*.txt";
-            saveFileDialog.Title = "Reporte de tokens";
-            saveFileDialog.FileName = "ReporteTokens.csv";
+            saveFileDialog.Filter = "Libro de Excel (*.xlsx)|*.xlsx";
+            saveFileDialog.Title = "Reporte de tokens con estilo";
+            saveFileDialog.FileName = "ReporteTokens.xlsx";
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    StringBuilder sb = new StringBuilder();
-
-                    sb.AppendLine("Token,Lexema,Patron,Fila,Columna");
-
-                    foreach (DataGridViewRow row in dgvTokens.Rows)
+                    using (var workbook = new XLWorkbook())
                     {
-                        if (row.IsNewRow) continue;
+                        var worksheet = workbook.Worksheets.Add("Tokens");
 
-                        string tipo = row.Cells[0].Value?.ToString() ?? "";
-                        string lexema = row.Cells[1].Value?.ToString() ?? "";
-                        string patron = row.Cells[2].Value?.ToString() ?? "";
-                        string fila = row.Cells[3].Value?.ToString() ?? "";
-                        string columna = row.Cells[4].Value?.ToString() ?? "";
+                        for (int i = 0; i < dgvTokens.Columns.Count; i++)
+                        {
+                            worksheet.Cell(1, i + 1).Value = dgvTokens.Columns[i].HeaderText;
+                        }
 
-                        sb.AppendLine($"{tipo},{lexema},{patron},{fila},{columna}");
+                        var headerRow = worksheet.Row(1);
+                        headerRow.Style.Font.Bold = true;
+                        headerRow.Style.Fill.BackgroundColor = XLColor.LightGray;
+
+                        int rowIndex = 2;
+                        foreach (DataGridViewRow row in dgvTokens.Rows)
+                        {
+                            if (row.IsNewRow) continue;
+
+                            for (int j = 0; j < dgvTokens.Columns.Count; j++)
+                            {
+                                worksheet.Cell(rowIndex, j + 1).Value = row.Cells[j].Value?.ToString() ?? "";
+                            }
+                            rowIndex++;
+                        }
+
+                        worksheet.Columns().AdjustToContents();
+
+                        workbook.SaveAs(saveFileDialog.FileName);
+                        MessageBox.Show("¡Archivo de Excel exportado y con formato ajustado con éxito!", "Información");
                     }
-
-                    File.WriteAllText(saveFileDialog.FileName, sb.ToString(), Encoding.UTF8);
-
-                    MessageBox.Show("¡Archivo exportado con éxito!", "Información");
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error al exportar el archivo: " + ex.Message, "Error");
                 }
             }
-
         }
 
         private void btnAgregarPalabra_Click(object sender, EventArgs e)
