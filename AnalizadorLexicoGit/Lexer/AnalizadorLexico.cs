@@ -89,7 +89,7 @@ namespace AnalizadorLexicoGit.Lexer
                     continue;
                 }
 
-                if (actual == '=' ||
+                if (
                     actual == '!' ||
                     actual == '<' ||
                     actual == '>' ||
@@ -100,8 +100,7 @@ namespace AnalizadorLexicoGit.Lexer
                     continue;
                 }
 
-                if (actual == '(' ||
-                    actual == ')' ||
+                if (
                     actual == '{' ||
                     actual == '}' ||
                     actual == '[' ||
