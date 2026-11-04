@@ -28,6 +28,8 @@ namespace AnalizadorLexicoGit
                 }
 
                 string[] alfabeto = txtVariables.Text.Split(',');
+                string tipoAutomata = cmbTipoAutomata.SelectedItem?.ToString() ?? "";
+                bool esAfnd = tipoAutomata.ToUpper().Contains("AFND");
 
                 dgvTransiciones.Columns.Clear();
                 dgvTransiciones.Rows.Clear();
@@ -41,6 +43,11 @@ namespace AnalizadorLexicoGit
                     {
                         dgvTransiciones.Columns.Add(simboloLimpio, simboloLimpio);
                     }
+                }
+
+                if (esAfnd && !dgvTransiciones.Columns.Contains("ε"))
+                {
+                    dgvTransiciones.Columns.Add("ε", "ε");
                 }
 
                 string estadoInicial = cmbInicial.SelectedItem?.ToString() ?? "";
@@ -101,63 +108,135 @@ namespace AnalizadorLexicoGit
         private void btnProbarCadena_Click(object sender, EventArgs e)
         {
             string cadena = txtCadenaPrueba.Text.Trim();
-            string estadoActual = cmbInicial.SelectedItem?.ToString();
+            string tipoAutomata = cmbTipoAutomata.SelectedItem?.ToString() ?? "";
+            bool esAfnd = tipoAutomata.ToUpper().Contains("AFND");
 
-            estadoActual = estadoActual.Replace("->", "").Trim();
+            string estadoInicialStr = cmbInicial.SelectedItem?.ToString().Replace("->", "").Trim() ?? "";
+
+            if (string.IsNullOrEmpty(estadoInicialStr))
+            {
+                MessageBox.Show("Por favor selecciona un estado inicial.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            HashSet<string> estadosActuales = new HashSet<string> { estadoInicialStr };
+
+            if (esAfnd)
+            {
+                estadosActuales = ObtenerEpsilonClosure(estadosActuales);
+            }
 
             foreach (char simbolo in cadena)
             {
                 string simboloStr = simbolo.ToString();
-                bool transicionEncontrada = false;
+                HashSet<string> siguientesEstados = new HashSet<string>();
 
-                foreach (DataGridViewRow row in dgvTransiciones.Rows)
+                foreach (string estadoActual in estadosActuales)
                 {
-                    if (row.IsNewRow) continue;
-
-                    string estadoFila = row.Cells["Estado"].Value.ToString().Replace("->", "").Replace("*", "").Trim();
-
-                    if (estadoFila == estadoActual)
+                    foreach (DataGridViewRow row in dgvTransiciones.Rows)
                     {
-                        if (dgvTransiciones.Columns.Contains(simboloStr))
-                        {
-                            string siguienteEstado = row.Cells[simboloStr].Value?.ToString();
+                        if (row.IsNewRow) continue;
 
-                            if (!string.IsNullOrEmpty(siguienteEstado))
+                        string estadoFila = row.Cells["Estado"].Value.ToString().Replace("->", "").Replace("*", "").Trim();
+
+                        if (estadoFila == estadoActual)
+                        {
+                            if (dgvTransiciones.Columns.Contains(simboloStr))
                             {
-                                estadoActual = siguienteEstado.Trim();
-                                transicionEncontrada = true;
-                                break; 
+                                string valorCelda = row.Cells[simboloStr].Value?.ToString();
+                                if (!string.IsNullOrEmpty(valorCelda))
+                                {
+                                    string[] destinos = valorCelda.Split(',');
+                                    foreach (string destino in destinos)
+                                    {
+                                        string destLimpio = destino.Trim();
+                                        if (!string.IsNullOrEmpty(destLimpio))
+                                        {
+                                            siguientesEstados.Add(destLimpio);
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
 
-                if (!transicionEncontrada)
+                estadosActuales = siguientesEstados;
+
+                if (esAfnd && estadosActuales.Count > 0)
                 {
-                    MessageBox.Show($"Cadena RECHAZADA ❌. El símbolo '{simboloStr}' no tiene transición válida desde el estado {estadoActual}.", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    estadosActuales = ObtenerEpsilonClosure(estadosActuales);
                 }
+
+                if (estadosActuales.Count == 0)
+                {
+                    break; 
+                }
+            }
+            bool esAceptado = false;
+            foreach (string estado in estadosActuales)
+            {
+                foreach (var itemChecked in chcAceptacion.CheckedItems)
+                {
+                    string estadoFinalConfigurado = itemChecked.ToString().Replace("*", "").Trim();
+                    if (estadoFinalConfigurado == estado)
+                    {
+                        esAceptado = true;
+                        break;
+                    }
+                }
+                if (esAceptado) break;
             }
 
-            bool esAceptado = false;
-            foreach (var itemChecked in chcAceptacion.CheckedItems)
-            {
-                string estadoFinalConfigurado = itemChecked.ToString().Replace("*", "").Trim();
-                if (estadoFinalConfigurado == estadoActual)
-                {
-                    esAceptado = true;
-                    break;
-                }
-            }
+            string estadosFinalesStr = string.Join(", ", estadosActuales);
 
             if (esAceptado)
             {
-                MessageBox.Show($"¡Cadena ACEPTADA! El recorrido finalizó en el estado de aceptación [{estadoActual}].", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"¡Cadena ACEPTADA! 🚀\nEl recorrido finalizó en los estados: [{estadosFinalesStr}], incluyendo al menos un estado de aceptación.", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show($"Cadena RECHAZADA. El recorrido finalizó en [{estadoActual}], el cual no es un estado final.", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($"Cadena RECHAZADA ❌.\nEl recorrido finalizó en los estados: [{estadosFinalesStr}], ninguno es estado final o no hay transiciones válidas.", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private HashSet<string> ObtenerEpsilonClosure(HashSet<string> estados)
+        {
+            if (!dgvTransiciones.Columns.Contains("ε")) return estados;
+
+            HashSet<string> closure = new HashSet<string>(estados);
+            Stack<string> pila = new Stack<string>(estados);
+
+            while (pila.Count > 0)
+            {
+                string estadoActual = pila.Pop();
+
+                foreach (DataGridViewRow row in dgvTransiciones.Rows)
+                {
+                    if (row.IsNewRow) continue;
+                    string estadoFila = row.Cells["Estado"].Value.ToString().Replace("->", "").Replace("*", "").Trim();
+
+                    if (estadoFila == estadoActual)
+                    {
+                        string valorCelda = row.Cells["ε"].Value?.ToString();
+                        if (!string.IsNullOrEmpty(valorCelda))
+                        {
+                            string[] destinos = valorCelda.Split(',');
+                            foreach (string destino in destinos)
+                            {
+                                string destLimpio = destino.Trim();
+                                if (!string.IsNullOrEmpty(destLimpio) && !closure.Contains(destLimpio))
+                                {
+                                    closure.Add(destLimpio);
+                                    pila.Push(destLimpio);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return closure;
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
