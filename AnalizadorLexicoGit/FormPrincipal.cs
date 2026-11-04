@@ -485,5 +485,13 @@ namespace AnalizadorLexicoGit
         {
 
         }
+
+        private void btnForm2_Click(object sender, EventArgs e)
+        {
+            FormAFDyAFND formularioAutomata = new FormAFDyAFND();
+            this.Hide();
+            formularioAutomata.ShowDialog();
+            this.Show();
+        }
     }
 }
